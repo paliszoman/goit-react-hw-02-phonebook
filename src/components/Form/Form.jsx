@@ -1,16 +1,22 @@
 import css from './Form.module.css';
 import React, { Component } from "react";
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 
 export class Form extends Component {
+
+    static propTypes = {
+        formSubmit: PropTypes.func,
+        props: PropTypes.objectOf(PropTypes.string)
+    }
     
     formSubmit = e => {
         e.preventDefault(); 
         const form = e.currentTarget.elements;
         const name = form.name.value;
         const number = form.number.value;
-        const id = nanoid();
+        const id = nanoid(6);
 
     this.props.onSubmit({ id, name, number });
     e.currentTarget.reset();
